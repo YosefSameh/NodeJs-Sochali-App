@@ -24,18 +24,19 @@ const GetPost =async (req,res)=>{
 
 
 const AddPost = async (req,res)=>{
-    const {titel,img,createAt} = req.body
+    const {titel,imgPost,createAt} = req.body
     const userId = req.user.id
 
     
 
     const user = await Users.findById(userId)
-
+    // const img = req.file ? req.file.path : null;
+    const img = req.file ? `/uploads/${req.file.filename}` : null;
     console.log(user,"suerssssssss");
     
         const newPost = new Posts({
             titel,
-            img,
+            imgPost:img,
             createAt,
             user_id: userId,
             firstName:user.firstName,
