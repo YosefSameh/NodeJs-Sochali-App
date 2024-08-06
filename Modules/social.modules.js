@@ -30,7 +30,7 @@ const SocialSchema = new  mongoose.Schema({
         type:String,
         required:true
     },
-    img:{
+    imgPost:{
         type:String,
     },
     createAt:{
