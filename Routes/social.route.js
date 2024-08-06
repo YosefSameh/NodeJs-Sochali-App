@@ -5,10 +5,11 @@ route.use(express.json())
 const {GetAllPosts,GetPost,AddPost,EditePost,DeletePost} = require("../Controllers/social.controller")
 const tokenCheck = require("../Middlewares/tokenCheck")
 const { AddComment, DeleteComment } = require("../Controllers/comment.controller")
+const upload = require("../Middlewares/upload")
 
 route.route("/")
 .get(GetAllPosts)
-.post(tokenCheck,AddPost)
+.post(tokenCheck ,upload.single('img'),AddPost)
 
 
 route.route("/:idPosts")
