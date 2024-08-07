@@ -9,7 +9,7 @@ const upload = require("../Middlewares/upload")
 
 route.route("/")
 .get(GetAllPosts)
-.post(tokenCheck ,upload.single('img'),AddPost)
+.post(tokenCheck ,upload.single('imgPost'),AddPost)
 
 
 route.route("/:idPosts")
