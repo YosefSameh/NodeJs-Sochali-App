@@ -1,8 +1,20 @@
 const multer = require('multer');
 const path = require('path');
 
+const cloudinary = require('cloudinary').v2;
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
+
+// إعدادات Cloudinary
+cloudinary.config({
+  cloud_name: process.env.CLOUDNAME,
+  api_key: process.env.APIKEY,
+  api_secret: process.env.APISECRET
+});
+
+
 // إعداد تخزين الملفات
 const storage = multer.diskStorage({
+    cloudinary: cloudinary,
     destination: function (req, file, cb) {
         cb(null, 'uploads/');
     },
