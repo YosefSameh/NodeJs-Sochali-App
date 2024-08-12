@@ -46,6 +46,9 @@ const SocialSchema = new  mongoose.Schema({
         required:true,
         type:String
     },
+    imgProfile:{
+        type:String
+    },
     user_id: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
