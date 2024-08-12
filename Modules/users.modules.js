@@ -73,6 +73,9 @@ const userSchema = new mongoose.Schema({
     token:{
         type:String,
     },
+    imgProfile:{
+        type:String,
+    },
     saved:[SavedSchema],
     follow:[FollowingSchema],
 })
