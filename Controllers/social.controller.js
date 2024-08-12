@@ -36,6 +36,7 @@ const AddPost = async (req,res)=>{
             titel,
             imgPost,
             createAt,
+            imgProfile:user.imgProfile,
             user_id: userId,
             firstName:user.firstName,
             lastName:user.lastName,
