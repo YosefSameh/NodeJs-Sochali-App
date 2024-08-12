@@ -31,8 +31,7 @@ const AddPost = async (req,res)=>{
 
     const user = await Users.findById(userId)
 
-    console.log(img,"img");
-    
+
         const newPost = new Posts({
             titel,
             imgPost,
