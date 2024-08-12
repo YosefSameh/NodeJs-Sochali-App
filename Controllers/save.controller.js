@@ -26,7 +26,7 @@ const SavePost = async (req,res)=>{
             const newPostSave = {
                 postId:post._id,
                 titel:post.titel,
-                img:post.img,
+                img:post.imgPost,
                 createAt:new Date(),
                 firstName:post.firstName,
                 lastName:post.lastName,
