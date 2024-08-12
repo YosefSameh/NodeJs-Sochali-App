@@ -20,7 +20,7 @@ const GetUser = async (req,res)=>{
 
 const Rigster = async (req,res)=>{
 
-   const {firstName,lastName,email,password} = req.body
+   const {firstName,imgProfile,lastName,email,password} = req.body
 
     const hashingPassword = await bcrupt.hash(password,10)
 
@@ -31,6 +31,7 @@ const Rigster = async (req,res)=>{
     firstName,
     lastName,
     email,
+    imgProfile,
     password:hashingPassword
    }) 
    const token = await JWT.sign({email:userNew.email,id:userNew._id,firstName:userNew.firstName,lastName:userNew.lastName},process.env.JWTSECRYT)
