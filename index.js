@@ -20,16 +20,13 @@ const {Server} = require("socket.io")
 const { createServer } = require('http');
 const server = createServer(app);
 const Message = require("./Modules/chat.modules")
+//   origin: "http://localhost:3000"
 const io = new Server(server, {
-    // cors: {
-    // //   origin: "http://localhost:3000"
-    //   origin: "https://react-js-sochali-app.vercel.app"
-    // }
     cors: {
-        origin: ["https://react-js-sochali-app.vercel.app", "http://localhost:3000"],
-        methods: ["GET", "POST"],
-        credentials: true
-      }
+    origin: "https://react-js-sochali-app.vercel.app",
+    methods: ["GET", "POST"]
+    }
+
   });
 
 io.on('connection', (socket) => {
@@ -83,5 +80,6 @@ app.use("/api/users",UsersRoute)
 server.listen(process.env.PORT,()=>{
     console.log("listen for Tasks");
 })
+
 
 
