@@ -2,7 +2,12 @@ require('dotenv').config();
 const express = require("express")
 const app = express()
 const cors = require("cors")
-app.use(cors())
+app.use(cors({
+    origin: "https://react-js-sochali-app.vercel.app", // الرابط اللي فيه الReact app
+    methods: ["GET", "POST"],
+    allowedHeaders: ["Authorization", "Content-Type"],
+    credentials: true
+}));
 const path = require('path');
 const mongoose = require("mongoose")
 
@@ -23,9 +28,9 @@ const Message = require("./Modules/chat.modules")
 //   origin: "http://localhost:3000"
 const io = new Server(server, {
     cors: {
-        origin: "https://react-js-sochali-app.vercel.app",
+        origin: "https://react-js-sochali-app.vercel.app", // الرابط اللي فيه الReact app
         methods: ["GET", "POST"],
-        allowedHeaders: ["Authorization", "my-custom-header"], // أضف الهيدر هنا
+        allowedHeaders: ["Authorization", "Content-Type"],
         credentials: true
     }
 });
