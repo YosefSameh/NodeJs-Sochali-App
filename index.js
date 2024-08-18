@@ -23,8 +23,7 @@ const Message = require("./Modules/chat.modules")
 //   origin: "http://localhost:3000"
 const io = new Server(server, {
     cors: {
-        origin: ["http://localhost:3000", "https://react-js-sochali-app.vercel.app"],
-        methods: ["GET", "POST"]
+        origin: "https://react-js-sochali-app.vercel.app"
     }
 
   });
