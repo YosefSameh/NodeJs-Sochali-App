@@ -23,9 +23,9 @@ const Message = require("./Modules/chat.modules")
 //   origin: "http://localhost:3000"
 const io = new Server(server, {
     cors: {
-        origin: "https://react-js-sochali-app.vercel.app", // رابط تطبيق الـReact على Vercel
+        origin: "https://react-js-sochali-app.vercel.app",
         methods: ["GET", "POST"],
-        allowedHeaders: ["Authorization"],
+        allowedHeaders: ["Authorization", "my-custom-header"], // أضف الهيدر هنا
         credentials: true
     }
 });
