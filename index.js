@@ -23,10 +23,14 @@ const Message = require("./Modules/chat.modules")
 
 const io = new Server(server, {
     cors: {
-        origin:"https://react-js-sochali-app.vercel.app",
-    }
+        origin: "https://react-js-sochali-app.vercel.app",
+        methods: ["GET", "POST"],
+        allowedHeaders: ["Authorization", "Content-Type"],
+        credentials: true
+    },
+    transports: ["websocket", "polling"] // تحديد وسائل النقل المتاحة
+});
 
-  });
 
 io.on('connection', (socket) => {
     Message.find()
