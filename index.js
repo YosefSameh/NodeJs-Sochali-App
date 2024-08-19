@@ -2,7 +2,6 @@ require('dotenv').config();
 const express = require("express")
 const app = express()
 const cors = require("cors")
-app.use(cors())
 const path = require('path');
 const mongoose = require("mongoose")
 
@@ -20,15 +19,12 @@ const {Server} = require("socket.io")
 const { createServer } = require('http');
 const server = createServer(app);
 const Message = require("./Modules/chat.modules")
+app.use(cors())
 
 const io = new Server(server, {
     cors: {
-        origin: "https://react-js-sochali-app.vercel.app",
-        methods: ["GET", "POST"],
-        allowedHeaders: ["Authorization", "Content-Type"],
-        credentials: true
+        origin: "https://react-js-sochali-app.vercel.app/chat"
     },
-    transports: ["websocket", "polling"] // تحديد وسائل النقل المتاحة
 });
 
 
