@@ -25,7 +25,7 @@ app.use(cors({
 
 const io = new Server(server, {
     cors: {
-        origin: "https://react-js-sochali-app.vercel.app/chat"
+        origin: "https://react-js-sochali-app.vercel.app"
     },
 });
 
