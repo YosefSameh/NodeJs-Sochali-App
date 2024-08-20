@@ -24,9 +24,12 @@ app.use(cors({
 }));
 
 const io = new Server(server, {
-    cors: {
-        origin: "https://react-js-sochali-app.vercel.app"
-    },
+     cors: {
+    origin: '*',
+    methods: ["GET", "POST"],
+    allowedHeaders: ["my-custom-header"],
+    credentials: true
+  }
 });
 
 
