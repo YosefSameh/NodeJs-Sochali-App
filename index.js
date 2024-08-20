@@ -19,9 +19,7 @@ const {Server} = require("socket.io")
 const { createServer } = require('http');
 const server = createServer(app);
 const Message = require("./Modules/chat.modules")
-app.use(cors({
-    origin: 'https://react-js-sochali-app.vercel.app',
-}));
+app.use(cors());
 
 const io = new Server(server, {
      cors: {
