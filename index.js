@@ -1,42 +1,47 @@
-require('dotenv').config();
 const express = require("express")
-const app = express()
+const fs = require('fs');
 const cors = require("cors")
 const path = require('path');
 const mongoose = require("mongoose")
+const Message = require("./Modules/chat.modules")
+const {Server} = require("socket.io")
+const app = express()
+const { createServer } = require('https');
+require('dotenv').config();
 
-mongoose.connect(process.env.URL)
-.then(()=>{
-    console.log("Data Bace Is Conecting");
-})
-.catch((error)=>{
-    console.log("error",error);
-})
+
+app.use(cors())
+
+
 
 //===================
 
-const {Server} = require("socket.io")
-const { createServer } = require('http');
 const server = createServer(app);
-const Message = require("./Modules/chat.modules")
-app.use(cors());
-
 const io = new Server(server, {
-     cors: {
-    origin: '*',
-    methods: ["GET", "POST"],
-  }
+    cors: {
+        origin: 'https://react-js-sochali-app.vercel.app', 
+    },
+    transports: ['websocket', 'polling']
 });
 
 
+
 io.on('connection', (socket) => {
+    console.log("contntion", socket.id);
+    socket.on('error', (err) => {
+        console.error("Socket error:", err);
+    });
+
+    socket.on('disconnect', (reason) => {
+        console.log(`Client disconnected due to ${reason}`);
+    });
     Message.find()
     .then(messages => {
         socket.emit('initial messages', messages);
     });
 
     socket.on('chat message', (msg) => {
-
+        
         const message = new Message({sender:msg.sender,imgProfile:msg.imgProfile, content: msg.content });
         message.save()
         .then(() => {
@@ -47,7 +52,7 @@ io.on('connection', (socket) => {
     socket.on("typing", () => {
         socket.broadcast.emit("ShowTyping");
     });
-
+    
     socket.on("stop-typing", () => {
         socket.broadcast.emit("StopTyping");
     });
@@ -56,6 +61,13 @@ io.on('connection', (socket) => {
 //===================
 
 
+mongoose.connect(process.env.URL)
+.then(()=>{
+    console.log("Data Bace Is Conecting");
+})
+.catch((error)=>{
+    console.log("error",error);
+})
 
 
 
@@ -82,3 +94,10 @@ server.listen(process.env.PORT,()=>{
 })
 
 
+
+// wssEngine:["ws","wss"],
+// allowEIO3:true,
+// transports:["websocket","polling"],
+//   methods: ["GET", "POST"],
+//   allowedHeaders: ["my-custom-header","Content-Type"],
+//   credentials: true
